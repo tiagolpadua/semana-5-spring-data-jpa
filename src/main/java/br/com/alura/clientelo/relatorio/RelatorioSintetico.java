@@ -36,29 +36,30 @@ public class RelatorioSintetico {
         Pedido pedidoMaisBarato = null;
         Pedido pedidoMaisCaro = null;
 
-        Set<String> categoriasProcessadas = new HashSet<>();
-
-        for (Pedido pedidoAtual : pedidos) {
-            if (pedidoMaisBarato == null || pedidoAtual.isMaisBaratoQue(pedidoMaisBarato)) {
-                pedidoMaisBarato = pedidoAtual;
-            } else if (pedidoMaisCaro == null || pedidoAtual.isMaisCaroQue(pedidoMaisCaro)) {
-                pedidoMaisCaro = pedidoAtual;
-            }
-
-            montanteDeVendas = montanteDeVendas.add(pedidoAtual.getValorTotal());
-            totalDeProdutosVendidos += pedidoAtual.getQuantidade();
-
-            categoriasProcessadas.add(pedidoAtual.getCategoria());
-        }
-
-        return new RelatorioSintetico(
-            pedidos.size(),
-            totalDeProdutosVendidos,
-            montanteDeVendas,
-            pedidoMaisBarato,
-            pedidoMaisCaro,
-            categoriasProcessadas.size()
-        );
+//        Set<String> categoriasProcessadas = new HashSet<>();
+//
+//        for (Pedido pedidoAtual : pedidos) {
+//            if (pedidoMaisBarato == null || pedidoAtual.isMaisBaratoQue(pedidoMaisBarato)) {
+//                pedidoMaisBarato = pedidoAtual;
+//            } else if (pedidoMaisCaro == null || pedidoAtual.isMaisCaroQue(pedidoMaisCaro)) {
+//                pedidoMaisCaro = pedidoAtual;
+//            }
+//
+//            montanteDeVendas = montanteDeVendas.add(pedidoAtual.getValorTotal());
+//            totalDeProdutosVendidos += pedidoAtual.getQuantidade();
+//
+//            categoriasProcessadas.add(pedidoAtual.getCategoria());
+//        }
+//
+//        return new RelatorioSintetico(
+//            pedidos.size(),
+//            totalDeProdutosVendidos,
+//            montanteDeVendas,
+//            pedidoMaisBarato,
+//            pedidoMaisCaro,
+//            categoriasProcessadas.size()
+//        );
+        return null;
     }
 
     public void exibir() {
@@ -81,10 +82,11 @@ public class RelatorioSintetico {
     }
 
     private String getDescricaoDoPedido(Pedido pedido) {
-        if (pedido == null) {
-            return "R$ 0,00";
-        }
-
-        return FormatUtils.formataParaReal(pedido.getValorTotal()) + " (" + pedido.getProduto() + ")";
+        return null;
+//        if (pedido == null) {
+//            return "R$ 0,00";
+//        }
+//
+//        return FormatUtils.formataParaReal(pedido.getValorTotal()) + " (" + pedido.getProduto() + ")";
     }
 }

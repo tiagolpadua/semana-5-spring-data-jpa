@@ -17,25 +17,25 @@ public class ProdutosMaisCarosPorCategoriaCommand implements FuncionalidadeComma
 
     @Override
     public void executa() {
-        Map<String, Optional<Pedido>> produtosMaisCarosPorCategoria = repositorioDePedidos.listaTodos()
-                .stream()
-                .collect(Collectors.groupingBy(
-                        Pedido::getCategoria,
-                        Collectors.maxBy(Comparator.comparing(Pedido::getPreco))
-                ));
-
-        produtosMaisCarosPorCategoria.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> {
-                    String categoria = entry.getKey();
-                    Pedido pedido = entry.getValue().orElseThrow();
-
-                    System.out.println("CATEGORIA: " + categoria);
-                    System.out.println("PRODUTO: " + pedido.getProduto());
-                    System.out.println("PREÇO: " + FormatUtils.formataParaReal(pedido.getPreco()));
-                    System.out.println();
-                });
+//        Map<String, Optional<Pedido>> produtosMaisCarosPorCategoria = repositorioDePedidos.listaTodos()
+//                .stream()
+//                .collect(Collectors.groupingBy(
+//                        Pedido::getCategoria,
+//                        Collectors.maxBy(Comparator.comparing(Pedido::getPreco))
+//                ));
+//
+//        produtosMaisCarosPorCategoria.entrySet()
+//                .stream()
+//                .sorted(Map.Entry.comparingByKey())
+//                .forEach(entry -> {
+//                    String categoria = entry.getKey();
+//                    Pedido pedido = entry.getValue().orElseThrow();
+//
+//                    System.out.println("CATEGORIA: " + categoria);
+//                    System.out.println("PRODUTO: " + pedido.getProduto());
+//                    System.out.println("PREÇO: " + FormatUtils.formataParaReal(pedido.getPreco()));
+//                    System.out.println();
+//                });
     }
 
     @Override

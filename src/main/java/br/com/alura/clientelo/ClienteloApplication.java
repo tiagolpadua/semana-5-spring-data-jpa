@@ -1,9 +1,11 @@
 package br.com.alura.clientelo;
 
+import br.com.alura.clientelo.cliente.ClienteRepository;
 import br.com.alura.clientelo.menu.*;
 import br.com.alura.clientelo.pedido.RepositorioDePedidos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,9 @@ import java.util.function.BiConsumer;
 @SpringBootApplication
 public class ClienteloApplication implements CommandLineRunner {
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(ClienteloApplication.class);
 
     private Scanner scanner = new Scanner(System.in);
@@ -23,6 +28,10 @@ public class ClienteloApplication implements CommandLineRunner {
     }
 
     public void run(String... args) throws Exception {
+        var clientes = clienteRepository.findAll();
+
+        clientes.forEach(cliente -> logger.info(cliente.toString()));
+
         RepositorioDePedidos repositorioDePedidos = new RepositorioDePedidos();
 
         Map<Integer, FuncionalidadeCommand> opcoesDeMenu = new LinkedHashMap<>();

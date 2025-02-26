@@ -15,19 +15,19 @@ public class ClientesMaisFieisCommand implements FuncionalidadeCommand {
 
     @Override
     public void executa() {
-        Map<String, Long> clientesMaisFieis = repositorioDePedidos.listaTodos()
-                .stream()
-                .collect(Collectors.groupingBy(Pedido::getCliente, Collectors.counting()));
-
-        clientesMaisFieis.entrySet()
-                .stream()
-                .sorted(Map.Entry.<String, Long>comparingByValue(Comparator.reverseOrder())
-                        .thenComparing(Map.Entry.comparingByKey()))
-                .forEach(entry -> {
-                    System.out.println("Nº DE PEDIDOS: " + entry.getValue());
-                    System.out.println("NOME: " + entry.getKey());
-                    System.out.println();
-                });
+//        Map<String, Long> clientesMaisFieis = repositorioDePedidos.listaTodos()
+//                .stream()
+//                .collect(Collectors.groupingBy(Pedido::getCliente, Collectors.counting()));
+//
+//        clientesMaisFieis.entrySet()
+//                .stream()
+//                .sorted(Map.Entry.<String, Long>comparingByValue(Comparator.reverseOrder())
+//                        .thenComparing(Map.Entry.comparingByKey()))
+//                .forEach(entry -> {
+//                    System.out.println("Nº DE PEDIDOS: " + entry.getValue());
+//                    System.out.println("NOME: " + entry.getKey());
+//                    System.out.println();
+//                });
     }
 
     @Override

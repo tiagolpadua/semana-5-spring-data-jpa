@@ -1,75 +1,95 @@
 package br.com.alura.clientelo.pedido;
 
+import br.com.alura.clientelo.cliente.Cliente;
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+@Entity
+@Data
 public class Pedido {
 
-    private String categoria;
-    private String produto;
-    private String cliente;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private BigDecimal preco;
-    private int quantidade;
+    @ManyToOne
+    private Cliente cliente;
 
-    private LocalDate data;
+    private LocalDateTime data;
 
-    public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
-        this.categoria = categoria;
-        this.produto = produto;
-        this.cliente = cliente;
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.data = data;
-    }
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemDePedido> itens = new ArrayList<>();
 
-    public String getCategoria() {
-        return categoria;
-    }
 
-    public String getProduto() {
-        return produto;
-    }
+//    private String categoria;
+//    private String produto;
 
-    public String getCliente() {
-        return cliente;
-    }
+//    private` BigDecimal preco;
+//    private int quantidade;
 
-    public BigDecimal getPreco() {
-        return preco;
-    }
+//    public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
+//        this.categoria = categoria;
+//        this.produto = produto;
+//        this.cliente = cliente;
+//        this.preco = preco;
+//        this.quantidade = quantidade;
+//        this.data = data;
+//    }
+//
+//    public String getCategoria() {
+//        return categoria;
+//    }
+//
+//    public String getProduto() {
+//        return produto;
+//    }
+//
+//    public String getCliente() {
+//        return cliente;
+//    }
+//
+//    public BigDecimal getPreco() {
+//        return preco;
+//    }
+//
+//    public int getQuantidade() {
+//        return quantidade;
+//    }
+//
+//    public LocalDate getData() {
+//        return data;
+//    }
+//
+//    public BigDecimal getValorTotal() {
+//        return preco.multiply(BigDecimal.valueOf(quantidade))
+//                .setScale(2, RoundingMode.HALF_UP);
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Pedido{" +
+//                "categoria='" + categoria + '\'' +
+//                ", produto='" + produto + '\'' +
+//                ", cliente='" + cliente + '\'' +
+//                ", preco=" + preco +
+//                ", quantidade=" + quantidade +
+//                ", data=" + data +
+//                '}';
+//    }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public BigDecimal getValorTotal() {
-        return preco.multiply(BigDecimal.valueOf(quantidade))
-                .setScale(2, RoundingMode.HALF_UP);
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "categoria='" + categoria + '\'' +
-                ", produto='" + produto + '\'' +
-                ", cliente='" + cliente + '\'' +
-                ", preco=" + preco +
-                ", quantidade=" + quantidade +
-                ", data=" + data +
-                '}';
-    }
-
-    public boolean isMaisBaratoQue(Pedido outroPedido) {
-        return getValorTotal().compareTo(outroPedido.getValorTotal()) < 0;
-    }
-
-    public boolean isMaisCaroQue(Pedido outroPedido) {
-        return getValorTotal().compareTo(outroPedido.getValorTotal()) > 0;
-    }
+//    public boolean isMaisBaratoQue(Pedido outroPedido) {
+//        return getValorTotal().compareTo(outroPedido.getValorTotal()) < 0;
+//    }
+//
+//    public boolean isMaisCaroQue(Pedido outroPedido) {
+//        return getValorTotal().compareTo(outroPedido.getValorTotal()) > 0;
+//    }
 }
