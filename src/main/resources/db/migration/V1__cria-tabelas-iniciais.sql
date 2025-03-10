@@ -33,10 +33,13 @@ create table pedido (
 
 create table item_pedido (
     id bigserial not null,
+    quantidade integer not null default 1,
+    preco_compra decimal(10,2) not null default 0,
+
     pedido_id bigint not null,
     produto_id bigint not null,
-    preco_compra decimal(10,2) not null default 0,
-    quantidade integer not null default 1,
+
+
 
     constraint pk_item_pedido primary key (id),
     constraint fk_item_pedido_pedido foreign key (pedido_id) references pedido(id),
