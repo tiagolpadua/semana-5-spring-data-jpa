@@ -2,9 +2,12 @@ package br.com.alura.clientelo.pedido;
 
 import br.com.alura.clientelo.produto.Produto;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
+@Data
 @Entity
 @Table(name = "item_pedido")
 public class ItemDePedido {
@@ -22,4 +25,9 @@ public class ItemDePedido {
 
     @ManyToOne
     private Produto produto;
+
+    public BigDecimal getValorTotal() {
+        return preco.multiply(BigDecimal.valueOf(quantidade))
+                .setScale(2, RoundingMode.HALF_UP);
+    }
 }

@@ -15,9 +15,8 @@ import java.util.function.BiConsumer;
 
 @SpringBootApplication
 public class ClienteloApplication implements CommandLineRunner {
-
     @Autowired
-    private ClienteRepository clienteRepository;
+    private RelatorioSinteticoCommand relatorioSinteticoCommand;
 
     private static final Logger logger = LoggerFactory.getLogger(ClienteloApplication.class);
 
@@ -28,14 +27,10 @@ public class ClienteloApplication implements CommandLineRunner {
     }
 
     public void run(String... args) throws Exception {
-        var clientes = clienteRepository.findAll();
-
-        clientes.forEach(cliente -> logger.info(cliente.toString()));
-
         RepositorioDePedidos repositorioDePedidos = new RepositorioDePedidos();
 
         Map<Integer, FuncionalidadeCommand> opcoesDeMenu = new LinkedHashMap<>();
-        opcoesDeMenu.put(1, new RelatorioSinteticoCommand(repositorioDePedidos));
+        opcoesDeMenu.put(1, relatorioSinteticoCommand);
         opcoesDeMenu.put(2, new ProdutosMaisVendidosCommand(repositorioDePedidos));
         opcoesDeMenu.put(3, new VendasPorCategoriaCommand(repositorioDePedidos));
         opcoesDeMenu.put(4, new ProdutosMaisCarosPorCategoriaCommand(repositorioDePedidos));
