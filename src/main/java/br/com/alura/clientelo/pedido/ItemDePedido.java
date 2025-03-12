@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 @Data
@@ -24,4 +25,9 @@ public class ItemDePedido {
 
     @ManyToOne
     private Produto produto;
+
+    public BigDecimal getValorTotal() {
+        return preco.multiply(BigDecimal.valueOf(quantidade))
+                .setScale(2, RoundingMode.HALF_UP);
+    }
 }

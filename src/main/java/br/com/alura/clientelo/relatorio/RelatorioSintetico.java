@@ -30,36 +30,35 @@ public class RelatorioSintetico {
     }
 
     public static RelatorioSintetico geraRelatorio(List<Pedido> pedidos) {
-//        int totalDeProdutosVendidos = 0;
-//        BigDecimal montanteDeVendas = BigDecimal.ZERO;
-//
-//        Pedido pedidoMaisBarato = null;
-//        Pedido pedidoMaisCaro = null;
-//
-//        Set<String> categoriasProcessadas = new HashSet<>();
-//
-//        for (Pedido pedidoAtual : pedidos) {
-//            if (pedidoMaisBarato == null || pedidoAtual.isMaisBaratoQue(pedidoMaisBarato)) {
-//                pedidoMaisBarato = pedidoAtual;
-//            } else if (pedidoMaisCaro == null || pedidoAtual.isMaisCaroQue(pedidoMaisCaro)) {
-//                pedidoMaisCaro = pedidoAtual;
-//            }
-//
-//            montanteDeVendas = montanteDeVendas.add(pedidoAtual.getValorTotal());
-//            totalDeProdutosVendidos += pedidoAtual.getQuantidade();
-//
-//            categoriasProcessadas.add(pedidoAtual.getCategoria());
-//        }
-//
-//        return new RelatorioSintetico(
-//            pedidos.size(),
-//            totalDeProdutosVendidos,
-//            montanteDeVendas,
-//            pedidoMaisBarato,
-//            pedidoMaisCaro,
-//            categoriasProcessadas.size()
-//        );
-        return null;
+        int totalDeProdutosVendidos = 0;
+        BigDecimal montanteDeVendas = BigDecimal.ZERO;
+
+        Pedido pedidoMaisBarato = null;
+        Pedido pedidoMaisCaro = null;
+
+        Set<String> categoriasProcessadas = new HashSet<>();
+
+        for (Pedido pedidoAtual : pedidos) {
+            if (pedidoMaisBarato == null || pedidoAtual.isMaisBaratoQue(pedidoMaisBarato)) {
+                pedidoMaisBarato = pedidoAtual;
+            } else if (pedidoMaisCaro == null || pedidoAtual.isMaisCaroQue(pedidoMaisCaro)) {
+                pedidoMaisCaro = pedidoAtual;
+            }
+
+            montanteDeVendas = montanteDeVendas.add(pedidoAtual.getValorTotal());
+            totalDeProdutosVendidos += pedidoAtual.getQuantidadeDeProdudosVendidos();
+
+            categoriasProcessadas.addAll(pedidoAtual.getCategorias());
+        }
+
+        return new RelatorioSintetico(
+            pedidos.size(),
+            totalDeProdutosVendidos,
+            montanteDeVendas,
+            pedidoMaisBarato,
+            pedidoMaisCaro,
+            categoriasProcessadas.size()
+        );
     }
 
     public void exibir() {
@@ -74,8 +73,8 @@ public class RelatorioSintetico {
         System.out.println("MONTANTE DE VENDAS: " + FormatUtils.formataParaReal(montanteDeVendas));
         System.out.println();
 
-        System.out.println("PEDIDO MAIS BARATO: " + getDescricaoDoPedido(pedidoMaisBarato));
-        System.out.println("PEDIDO MAIS CARO: " + getDescricaoDoPedido(pedidoMaisCaro));
+        System.out.println("PEDIDO MAIS BARATO: " + FormatUtils.formataParaReal(pedidoMaisBarato.getValorTotal()));
+        System.out.println("PEDIDO MAIS CARO: " + FormatUtils.formataParaReal(pedidoMaisCaro.getValorTotal()));
         System.out.println();
 
         System.out.println("### FIM DO RELATÓRIO ###");
